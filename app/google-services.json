@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "955696375845",
+    "firebase_url": "https://fafeat-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fafeat-app",
+    "storage_bucket": "fafeat-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955696375845:android:0dfb47f40f2b478dd577cc",
+        "android_client_info": {
+          "package_name": "com.example.fafeat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955696375845-98pn00orrjbcqb8rl0k8dttlhb6pqqbb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fafeat",
+            "certificate_hash": "ea0ba4887af5402ba9d5ef38d4f816ae4360e99d"
+          }
+        },
+        {
+          "client_id": "955696375845-vcr4e0h082l009pbmlobm52lncdtsuh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCtrpRPxJK7_rqhM8sDhDCPw4yUfw4cpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955696375845-vcr4e0h082l009pbmlobm52lncdtsuh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

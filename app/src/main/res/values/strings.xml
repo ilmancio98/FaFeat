@@ -1,0 +1,177 @@
+<resources>
+    <!--  Todo: Basic + Splash Screen Strings  -->
+
+    <string name="app_name">FafEat</string>
+    <string name="logo_name">Get A Way</string>
+    <string name="slogan_name">Everything your city holds!</string>
+    <string name="powered_by">Powered By Manpo</string>
+
+
+    <!--  Todo: Strings for On Boarding Screen  -->
+
+    <!--Titles-->
+    <string name="first_slide_title">Search Your Location</string>
+    <string name="second_slide_title">Make A Call</string>
+    <string name="third_slide_title">Add Missing Place</string>
+    <string name="fourth_slide_title">Sit Back And Enjoy</string>
+
+    <!--Descriptions-->
+    <string name="first_slide_desc">You can search any place nearby or with-in the specified city. We will display specific or all related shops to match your search. </string>
+    <string name="second_slide_desc">We provide almost all the numbers of all departments and shops registered with us. You can perform bookings as well.</string>
+    <string name="third_slide_desc">If you have a shop or somethings and want to be a part of our growing industry then add your place by follwing simple steps.</string>
+    <string name="fourth_slide_desc">We will handle everything for you. As you have the app in your pocket then you don\'t have to worry about anything.  </string>
+
+    <!--Buttons-->
+    <string name="skip_btn">Skip</string>
+    <string name="next_btn">Next</string>
+    <string name="let_get_started">Lets Get Started</string>
+
+
+    <!--   TODO:Strings for Dashboard    -->
+
+    <!--  Categories  -->
+    <string name="hotels">Hotels</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="shops">Shops</string>
+    <string name="banks">Banks</string>
+    <string name="airports">Airports</string>
+    <string name="education">Education</string>
+    <string name="hospitals">Hospitals</string>
+
+    <!--  Titles and Descriptions  -->
+    <string name="featured_locations">All Featured Locations</string>
+    <string name="featured_locations_description">All the locations that are featured and have the top demand in town!</string>
+    <string name="most_viewed_locations">Most Viewed</string>
+    <string name="categories">Categories</string>
+    <string name="view_all">View All</string>
+    <string name="search_text">Search...</string>
+
+
+    <!--   TODO: Menu Names     -->
+
+    <!--     General Menu names     -->
+    <string name="home">HOME</string>
+    <string name="search">SEARCH</string>
+    <string name="all_categories">ALL CATEGORIES</string>
+    <string name="add_missing_place">ADD MISSING PLACE</string>
+    <string name="login">Login</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="share">Share</string>
+    <string name="rate_us">Rate Us</string>
+
+    <!--     All Categories Menu names     -->
+    <string name="expand_all">Expand All</string>
+    <string name="car_rent">Car Rent</string>
+    <string name="all_shops">All Shops</string>
+
+    <!--     Scelta utente     -->
+
+    <string name="choose_type_of_registration">Scegli come registrarti</string>
+    <string name="cliente">Cliente</string>
+    <string name="gestore">Gestore</string>
+
+
+    <!--     Strings restaurant    -->
+    <string name="name_restaurant">Nome Ristorante</string>
+    <string name="restaurant_address">Indirizzo Ristorante</string>
+    <string name="restaurant_number">Numero Ristorante</string>
+
+    <!--  General Strings  -->
+    <string name="sign_up">Sign Up</string>
+    <string name="retailer_heading">Fast Arrive\nFirst Eat</string>
+    <string name="retailer_tag_line">Ordina il tuo cibo prima del tuo arrivo </string>
+    <string name="create_account">Create\nAccount</string>
+    <string name="how_we_work">How we work?</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_password">Forget Password</string>
+
+    <!--  Field Strings cliente/gestore  -->
+    <string name="enter_full_name">Full Name</string>
+    <string name="enter_username">Username</string>
+    <string name="enter_email">Email</string>
+    <string name="enter_phone_number">Phone Number</string>
+    <string name="enter_password">Password</string>
+
+
+    <!--   OTP Screen -->
+    <string name="otp_code_text">Co\nde</string>
+    <string name="otp_verification_text">Verification</string>
+    <string name="otp_description_text">Enter one time password sent on\n+923332225522</string>
+
+
+    <!--   Reset Password -->
+    <string name="new_credentials">New\nCredentials</string>
+    <string name="new_credentials_detail">Your identity has been verified!\nSet your new password</string>
+    <string name="forget_password_detail">Provide your account\'s email for which you want to reset your password!</string>
+    <string name="password_updated">Password\nUpdated</string>
+    <string name="password_updated_success_message">your password has been updated!</string>
+    <string name="make_selection">Make\nSelection</string>
+    <string name="make_selection_detail">Select which contact detail should we use to reset your password?</string>
+    <string name="via_sms">via sms:</string>
+    <string name="via_mail">via mail:</string>
+    <string name="verify_code">Verify Code</string>
+    <string name="todo">TODO</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--   Pietanze -->
+
+    <!--   Antipasto -->
+
+    <string name="nome_antipasto">Nome</string>
+    <string name="ingredienti_antipasto">Ingredienti</string>
+    <string name="prezzo_antipasto">Prezzo </string>
+    <string name="img_antipasto">Image</string>
+
+    <!--   Primi -->
+
+    <string name="nome_primo">Nome</string>
+    <string name="ingredienti_primo">Nome</string>
+    <string name="prezzo_primo">Nome</string>
+    <string name="img_primo">Nome</string>
+    <!--   Secondi -->
+
+    <string name="nome_secondo">Nome</string>
+    <string name="ingredienti_secondo">Ingredienti</string>
+    <string name="prezzo_secondo">Prezzo </string>
+    <string name="img_secondo">Image</string>
+    <!--   Contorni -->
+
+    <string name="nome_contorno">Nome</string>
+    <string name="ingredienti_contorno">Ingredienti</string>
+    <string name="prezzo_contorno">Prezzo </string>
+    <string name="img_contorno">Image</string>
+    <!--   Panini -->
+
+    <string name="nome_panino">Nome</string>
+    <string name="ingredienti_panino">Ingredienti</string>
+    <string name="prezzo_panino">Prezzo </string>
+    <string name="img_panino">Image</string>
+    <!--   Dolci -->
+
+    <string name="nome_dolce">Nome</string>
+    <string name="ingredienti_dolce">Ingredienti</string>
+    <string name="prezzo_dolce">Prezzo </string>
+    <string name="img_dolce">Image</string>
+    <!--   Pizze Bianche -->
+
+    <string name="nome_pizza_bianca">Nome</string>
+    <string name="ingredienti_pizza_bianca">Ingredienti</string>
+    <string name="prezzo_pizza_bianca">Prezzo </string>
+    <string name="img_pizza_bianca">Image</string>
+    <!--   Pizze Rosse -->
+
+    <string name="nome_pizza_rossa">Nome</string>
+    <string name="ingredienti_pizza_rossa">Ingredienti</string>
+    <string name="prezzo_pizza_rossa">Prezzo </string>
+    <string name="img_pizza_rossa">Image</string>
+    <!--   Bevande -->
+
+    <string name="nome_bevanda">Nome</string>
+    <string name="prezzo_bevanda">Prezzo </string>
+    <string name="img_bevanda">Image</string>
+
+    <string name="add_pietanza">Aggiungi</string>
+
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Gestore.Menu.Contorni">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Contorni"
+        android:gravity="center"/>
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="73dp"
+        android:layout_height="62dp"
+        app:srcCompat="@drawable/general_back_icon"
+        android:onClick="callVistaGestoreMenu"/>
+    <ImageButton
+        android:id="@+id/btn_add_antipasti"
+        android:layout_width="73dp"
+        android:layout_height="62dp"
+        android:layout_alignParentEnd="true"
+        android:background="#12000000"
+        app:srcCompat="@drawable/add_missing_place_icon"
+        android:onClick="callAddContorni"/>
+
+</RelativeLayout>
