@@ -23,7 +23,7 @@ public class Bevande extends AppCompatActivity {
     }
 
     public void callVistaGestoreMenu(View view) {
-        startActivity(new Intent(getApplicationContext(), VistaGestoreMenuFragment.class));
+        onBackPressed();
     }
 
     public void callAddBevande(View view) {

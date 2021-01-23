@@ -38,15 +38,13 @@ public class AggiuntaContorni extends AppCompatActivity {
     Button add_antipasto;
     private ImageView img_antipasto;
     public Uri imageUri;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
 
     SessionManager sessionManagerGestore;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
 
 
 
@@ -64,8 +62,6 @@ public class AggiuntaContorni extends AppCompatActivity {
         add_antipasto = findViewById(R.id.add_antipasto);
         img_antipasto = findViewById(R.id.img_antipasto);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
 
 
 
@@ -75,36 +71,46 @@ public class AggiuntaContorni extends AppCompatActivity {
         ingredienti_antipasto = findViewById(R.id.ingredienti_antipasto);
 
 
+
+        add_antipasto.setOnClickListener(view -> {
+
+            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
+                return;
+            }
+
+            uploadImg();
+
+
+        });
+
         img_antipasto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
             }
         });
+    }
 
-        add_antipasto.setOnClickListener(view -> {
+    private void createContorno(String img_path){
 
-            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo()) {
-                return;
-            }
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
 
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("Menu/Contorni");
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Gestori/" + username + "Menu/Contorni");
 
-            String _name_pietanza= nome_antipasto.getEditText().getText().toString();
-            String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();
-            String _prezzo_pietanza= prezzo_antipasto.getEditText().getText().toString();
-            String _img_antipasto = img_antipasto.toString();
+        String _name_pietanza= nome_antipasto.getEditText().getText().toString();
+        String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();
+        String _prezzo_pietanza= prezzo_antipasto.getEditText().getText().toString();
+        String _img_antipasto = img_path;
 
-            PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
+        PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
 
-            reference.child(_name_pietanza).setValue(helperClass);
+        reference.child(_name_pietanza).setValue(helperClass);
 
-            Intent intent = new Intent(getApplicationContext(), Contorni.class);
-            startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), Contorni.class);
+        startActivity(intent);
 
 
-        });
     }
 
     private void  choosePicture(){
@@ -120,7 +126,6 @@ public class AggiuntaContorni extends AppCompatActivity {
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
             img_antipasto.setImageURI(imageUri);
-            uploadImg();
         }
     }
 
@@ -130,8 +135,9 @@ public class AggiuntaContorni extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        final  String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("images/"+randomKey);
+        String img_path = "images/"+UUID.randomUUID().toString();
+
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -139,6 +145,7 @@ public class AggiuntaContorni extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                        createContorno(img_path);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -203,6 +210,11 @@ public class AggiuntaContorni extends AppCompatActivity {
             prezzo_antipasto.setErrorEnabled(false);
             return true;
         }
+    }
+
+    private boolean validateImg(){
+
+        return imageUri != null;
 
     }
 }

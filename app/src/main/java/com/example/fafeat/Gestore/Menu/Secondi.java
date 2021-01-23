@@ -24,7 +24,7 @@ public class Secondi extends AppCompatActivity {
     }
 
     public void callVistaGestoreMenu(View view) {
-        startActivity(new Intent(getApplicationContext(), VistaGestoreMenuFragment.class));
+        onBackPressed();
     }
     public void callAddSecondi(View view) {
         startActivity(new Intent(getApplicationContext(), AggiuntaSecondi.class));

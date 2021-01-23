@@ -46,8 +46,6 @@ public class AggiuntaAntipasti extends AppCompatActivity {
     Button add_antipasto;
     private ImageView img_antipasto;
     private Uri imageUri;
-    private FirebaseStorage storage;
-    private ProgressBar progressBar;
 
 
     SessionManagerGestore sessionManagerGestore;
@@ -71,11 +69,7 @@ public class AggiuntaAntipasti extends AppCompatActivity {
         backBtn = findViewById(R.id.signup_back_button);
         add_antipasto = findViewById(R.id.add_antipasto);
         img_antipasto = findViewById(R.id.img_antipasto);
-        progressBar = findViewById(R.id.progressBar);
 
-        progressBar.setVisibility(View.INVISIBLE);
-
-        storage = FirebaseStorage.getInstance();
 
 
         //Hooks for getting data
@@ -86,26 +80,11 @@ public class AggiuntaAntipasti extends AppCompatActivity {
 
         add_antipasto.setOnClickListener(view -> {
 
-            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo()) {
+            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
                 return;
             }
 
-            String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("Gestori/" + username + "/Menu/Antipasti");
-
-            String _name_pietanza = nome_antipasto.getEditText().getText().toString();
-            String _ingredienti_pietanza = ingredienti_antipasto.getEditText().getText().toString();
-            String _prezzo_pietanza = prezzo_antipasto.getEditText().getText().toString();
-            String _img_antipasto = img_antipasto.toString();
-
-            PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
-
-            reference.child(_name_pietanza).setValue(helperClass);
-
-            Intent intent = new Intent(getApplicationContext(), Antipasti.class);
-            startActivity(intent);
+            uploadImg();
 
         });
 
@@ -115,6 +94,28 @@ public class AggiuntaAntipasti extends AppCompatActivity {
                 choosePicture();
             }
         });
+    }
+
+    private void createAntipasto(String img_path) {
+
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Gestori/" + username + "/Menu/Antipasti");
+
+        String _name_pietanza = nome_antipasto.getEditText().getText().toString();
+        String _ingredienti_pietanza = ingredienti_antipasto.getEditText().getText().toString();
+        String _prezzo_pietanza = prezzo_antipasto.getEditText().getText().toString();
+        String _img_antipasto = img_path;
+
+        PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
+
+
+
+        reference.child(_name_pietanza).setValue(helperClass);
+
+        Intent intent = new Intent(getApplicationContext(), Antipasti.class);
+        startActivity(intent);
     }
 
     private void  choosePicture(){
@@ -130,7 +131,6 @@ public class AggiuntaAntipasti extends AppCompatActivity {
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
             img_antipasto.setImageURI(imageUri);
-            uploadImg();
         }
     }
 
@@ -140,7 +140,9 @@ public class AggiuntaAntipasti extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child("images/"+UUID.randomUUID().toString());
+        String img_path = "images/"+UUID.randomUUID().toString();
+
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -149,6 +151,7 @@ public class AggiuntaAntipasti extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                        createAntipasto(img_path);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -214,6 +217,12 @@ public class AggiuntaAntipasti extends AppCompatActivity {
             prezzo_antipasto.setErrorEnabled(false);
             return true;
         }
+
+    }
+
+    private boolean validateImg(){
+
+       return imageUri != null;
 
     }
 }

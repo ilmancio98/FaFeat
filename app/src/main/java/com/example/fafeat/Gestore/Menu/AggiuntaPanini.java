@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.fafeat.Databases.PietanzaHelperClass;
 import com.example.fafeat.Databases.SessionManager;
+import com.example.fafeat.Databases.SessionManagerGestore;
 import com.example.fafeat.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,15 +38,12 @@ public class AggiuntaPanini extends AppCompatActivity {
     Button add_antipasto;
     private ImageView img_antipasto;
     public Uri imageUri;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
 
-    SessionManager sessionManagerGestore;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    SessionManagerGestore sessionManagerGestore;
 
 
     FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -57,13 +55,12 @@ public class AggiuntaPanini extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        sessionManagerGestore = new SessionManagerGestore(AggiuntaPanini.this, SessionManagerGestore.SESSION_USERSESSION);
         setContentView(R.layout.activity_aggiunta_panini);
         backBtn = findViewById(R.id.signup_back_button);
         add_antipasto = findViewById(R.id.add_antipasto);
         img_antipasto = findViewById(R.id.img_antipasto);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
 
 
 
@@ -73,36 +70,45 @@ public class AggiuntaPanini extends AppCompatActivity {
         ingredienti_antipasto = findViewById(R.id.ingredienti_antipasto);
 
 
+
+        add_antipasto.setOnClickListener(view -> {
+
+            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
+                return;
+            }
+
+            uploadImg();
+
+        });
+
         img_antipasto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
             }
         });
+    }
 
-        add_antipasto.setOnClickListener(view -> {
+    private void createPanino(String img_path) {
 
-            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo()) {
-                return;
-            }
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
 
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("Menu/Panini");
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Gestori/" + username + "/Menu/Panini");
 
-            String _name_pietanza= nome_antipasto.getEditText().getText().toString();
-            String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();
-            String _prezzo_pietanza= prezzo_antipasto.getEditText().getText().toString();
-            String _img_antipasto = img_antipasto.toString();
+        String _name_pietanza = nome_antipasto.getEditText().getText().toString();
+        String _ingredienti_pietanza = ingredienti_antipasto.getEditText().getText().toString();
+        String _prezzo_pietanza = prezzo_antipasto.getEditText().getText().toString();
+        String _img_antipasto = img_path;
 
-            PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
-
-            reference.child(_name_pietanza).setValue(helperClass);
-
-            Intent intent = new Intent(getApplicationContext(), Panini.class);
-            startActivity(intent);
+        PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
 
 
-        });
+
+        reference.child(_name_pietanza).setValue(helperClass);
+
+        Intent intent = new Intent(getApplicationContext(), Antipasti.class);
+        startActivity(intent);
     }
 
     private void  choosePicture(){
@@ -128,8 +134,9 @@ public class AggiuntaPanini extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        final  String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("images/"+randomKey);
+        String img_path = "images/"+UUID.randomUUID().toString();
+
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -137,6 +144,7 @@ public class AggiuntaPanini extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                        createPanino(img_path);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -201,6 +209,11 @@ public class AggiuntaPanini extends AppCompatActivity {
             prezzo_antipasto.setErrorEnabled(false);
             return true;
         }
+    }
+
+    private boolean validateImg(){
+
+        return imageUri != null;
 
     }
 }

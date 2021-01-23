@@ -23,7 +23,7 @@ public class Pizze_Bianche extends AppCompatActivity {
     }
 
     public void callVistaGestoreMenu(View view) {
-        startActivity(new Intent(getApplicationContext(), VistaGestoreMenuFragment.class));
+        onBackPressed();
     }
 
     public void callAddPizzeBianche(View view) {

@@ -22,7 +22,7 @@ public class Dolci extends AppCompatActivity {
         back = findViewById(R.id.back_icon);
     }
     public void callVistaGestoreMenu(View view) {
-        startActivity(new Intent(getApplicationContext(), VistaGestoreMenuFragment.class));
+        onBackPressed();
     }
     public void callAddDolci(View view) {
         startActivity(new Intent(getApplicationContext(), AggiuntaDolci.class));

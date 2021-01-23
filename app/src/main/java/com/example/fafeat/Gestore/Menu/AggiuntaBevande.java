@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.fafeat.Databases.PietanzaHelperClass;
@@ -38,15 +39,12 @@ public class AggiuntaBevande extends AppCompatActivity {
     Button add_antipasto;
     private ImageView img_antipasto;
     public Uri imageUri;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
 
     SessionManager sessionManagerGestore;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
 
 
@@ -64,8 +62,6 @@ public class AggiuntaBevande extends AppCompatActivity {
         add_antipasto = findViewById(R.id.add_antipasto);
         img_antipasto = findViewById(R.id.img_antipasto);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
 
 
 
@@ -75,38 +71,46 @@ public class AggiuntaBevande extends AppCompatActivity {
         ingredienti_antipasto = findViewById(R.id.ingredienti_antipasto);
 
 
+
+        add_antipasto.setOnClickListener(view -> {
+
+            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
+                return;
+            }
+
+            uploadImg();
+
+        });
+
         img_antipasto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
             }
         });
+    }
 
-        add_antipasto.setOnClickListener(view -> {
+    private void createBevanda(String img_path){
 
-            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo()) {
-                return;
-            }
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Gestori/" + username + "Menu/Bevande");
 
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("Menu/Bevande");
+        String _name_pietanza= nome_antipasto.getEditText().getText().toString();
+        String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();
+        String _prezzo_pietanza= prezzo_antipasto.getEditText().getText().toString();
+        String _img_antipasto = img_path;
 
-            String _name_pietanza= nome_antipasto.getEditText().getText().toString();
-            String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();
-            String _prezzo_pietanza= prezzo_antipasto.getEditText().getText().toString();
-            String _img_antipasto = img_antipasto.toString();
-
-           PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
+        PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
 
 
 
-            reference.child(_name_pietanza).setValue(helperClass);
+        reference.child(_name_pietanza).setValue(helperClass);
 
 
-            Intent intent = new Intent(getApplicationContext(), Bevande.class);
-            startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), Bevande.class);
+        startActivity(intent);
 
-        });
     }
 
     private void  choosePicture(){
@@ -122,7 +126,6 @@ public class AggiuntaBevande extends AppCompatActivity {
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
             img_antipasto.setImageURI(imageUri);
-            uploadImg();
         }
     }
 
@@ -132,8 +135,9 @@ public class AggiuntaBevande extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        final  String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("images/"+randomKey);
+        String img_path = "images/"+UUID.randomUUID().toString();
+
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -141,6 +145,7 @@ public class AggiuntaBevande extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
                         Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                        createBevanda(img_path);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -205,6 +210,11 @@ public class AggiuntaBevande extends AppCompatActivity {
             prezzo_antipasto.setErrorEnabled(false);
             return true;
         }
+    }
+
+    private boolean validateImg(){
+
+        return imageUri != null;
 
     }
 }
