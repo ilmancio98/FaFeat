@@ -38,15 +38,13 @@ public class AggiuntaPizzeRosse extends AppCompatActivity {
     Button add_antipasto;
     private ImageView img_antipasto;
     public Uri imageUri;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
 
-    SessionManager sessionManagerGestore;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    SessionManagerGestore sessionManagerGestore;
 
 
     FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    DatabaseReference reference  = FirebaseDatabase.getInstance().getReference();
+
 
 
 
@@ -58,15 +56,13 @@ public class AggiuntaPizzeRosse extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        sessionManagerGestore = new SessionManager(this, SessionManagerGestore.SESSION_USERSESSION);
+        sessionManagerGestore = new SessionManagerGestore(AggiuntaPizzeRosse.this, SessionManagerGestore.SESSION_USERSESSION);
         setContentView(R.layout.activity_aggiunta_pizze_rosse);
 
         backBtn = findViewById(R.id.signup_back_button);
         add_antipasto = findViewById(R.id.add_antipasto);
         img_antipasto = findViewById(R.id.img_antipasto);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
 
 
 
@@ -76,36 +72,45 @@ public class AggiuntaPizzeRosse extends AppCompatActivity {
         ingredienti_antipasto = findViewById(R.id.ingredienti_antipasto);
 
 
+
+
+        add_antipasto.setOnClickListener(view -> {
+
+            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
+                return;
+            }
+
+            uploadImg();
+        });
+
         img_antipasto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 choosePicture();
             }
         });
+    }
 
-        add_antipasto.setOnClickListener(view -> {
+    private void createPizzaRossa(String img_path) {
 
-            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo()) {
-                return;
-            }
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
 
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("Menu/PizzeRosse");
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Gestori/" + username + "/Menu/PizzeRosse");
 
-            String _name_pietanza= nome_antipasto.getEditText().getText().toString();
-            String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();
-            String _prezzo_pietanza= prezzo_antipasto.getEditText().getText().toString();
-            String _img_antipasto = img_antipasto.toString();
+        String _name_pietanza = nome_antipasto.getEditText().getText().toString();
+        String _ingredienti_pietanza = ingredienti_antipasto.getEditText().getText().toString();
+        String _prezzo_pietanza = prezzo_antipasto.getEditText().getText().toString();
+        String _img_antipasto = img_path;
 
-            PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
-
-            reference.child(_name_pietanza).setValue(helperClass);
-
-            Intent intent = new Intent(getApplicationContext(), Pizze_Rosse.class);
-            startActivity(intent);
+        PietanzaHelperClass helperClass = new PietanzaHelperClass(_name_pietanza, _ingredienti_pietanza, _prezzo_pietanza, _img_antipasto);
 
 
-        });
+
+        reference.child(_name_pietanza).setValue(helperClass);
+
+        Intent intent = new Intent(getApplicationContext(), Pizze_Rosse.class);
+        startActivity(intent);
     }
 
     private void  choosePicture(){
@@ -121,7 +126,6 @@ public class AggiuntaPizzeRosse extends AppCompatActivity {
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
             img_antipasto.setImageURI(imageUri);
-            uploadImg();
         }
     }
 
@@ -131,22 +135,27 @@ public class AggiuntaPizzeRosse extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        final  String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("images/"+randomKey);
+        final String[] img_path = {(UUID.randomUUID().toString())};
+
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path[0]);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        pd.dismiss();
-                        Toast.makeText(getApplicationContext(), "Immagine non caricata", Toast.LENGTH_SHORT).show();
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                final Uri downloadUrl = uri;
+                                img_path[0] = downloadUrl.toString();
+
+                                pd.dismiss();
+                                Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                                createPizzaRossa(img_path[0]);
+
+                            }
+                        });
                     }
                 })
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>(){
@@ -204,6 +213,12 @@ public class AggiuntaPizzeRosse extends AppCompatActivity {
             prezzo_antipasto.setErrorEnabled(false);
             return true;
         }
+
+    }
+
+    private boolean validateImg(){
+
+        return imageUri != null;
 
     }
 }

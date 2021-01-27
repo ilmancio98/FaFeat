@@ -107,7 +107,7 @@ public class AggiuntaPanini extends AppCompatActivity {
 
         reference.child(_name_pietanza).setValue(helperClass);
 
-        Intent intent = new Intent(getApplicationContext(), Antipasti.class);
+        Intent intent = new Intent(getApplicationContext(), Panini.class);
         startActivity(intent);
     }
 
@@ -124,7 +124,6 @@ public class AggiuntaPanini extends AppCompatActivity {
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
             img_antipasto.setImageURI(imageUri);
-            uploadImg();
         }
     }
 
@@ -134,24 +133,27 @@ public class AggiuntaPanini extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        String img_path = "images/"+UUID.randomUUID().toString();
+        final String[] img_path = {(UUID.randomUUID().toString())};
 
-        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path);
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path[0]);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
-                        createPanino(img_path);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        pd.dismiss();
-                        Toast.makeText(getApplicationContext(), "Immagine non caricata", Toast.LENGTH_SHORT).show();
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                final Uri downloadUrl = uri;
+                                img_path[0] = downloadUrl.toString();
+
+                                pd.dismiss();
+                                Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                                createPanino(img_path[0]);
+
+                            }
+                        });
                     }
                 })
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>(){

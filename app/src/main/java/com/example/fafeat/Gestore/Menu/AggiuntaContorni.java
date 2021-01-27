@@ -39,7 +39,7 @@ public class AggiuntaContorni extends AppCompatActivity {
     private ImageView img_antipasto;
     public Uri imageUri;
 
-    SessionManager sessionManagerGestore;
+    SessionManagerGestore sessionManagerGestore;
 
 
     FirebaseDatabase rootNode;
@@ -55,7 +55,7 @@ public class AggiuntaContorni extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        sessionManagerGestore = new SessionManager(this, SessionManagerGestore.SESSION_USERSESSION);
+        sessionManagerGestore = new SessionManagerGestore(AggiuntaContorni.this, SessionManagerGestore.SESSION_USERSESSION);
         setContentView(R.layout.activity_aggiunta_contorni);
 
         backBtn = findViewById(R.id.signup_back_button);
@@ -96,7 +96,7 @@ public class AggiuntaContorni extends AppCompatActivity {
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
 
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Gestori/" + username + "Menu/Contorni");
+        reference = rootNode.getReference("Gestori/" + username + "/Menu/Contorni");
 
         String _name_pietanza= nome_antipasto.getEditText().getText().toString();
         String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();
@@ -135,24 +135,27 @@ public class AggiuntaContorni extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        String img_path = "images/"+UUID.randomUUID().toString();
+        final String[] img_path = {(UUID.randomUUID().toString())};
 
-        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path);
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path[0]);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
-                        createContorno(img_path);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        pd.dismiss();
-                        Toast.makeText(getApplicationContext(), "Immagine non caricata", Toast.LENGTH_SHORT).show();
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                final Uri downloadUrl = uri;
+                                img_path[0] = downloadUrl.toString();
+
+                                pd.dismiss();
+                                Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                                createContorno(img_path[0]);
+
+                            }
+                        });
                     }
                 })
                 .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>(){
