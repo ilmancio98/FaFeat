@@ -41,15 +41,21 @@ public class Dolci extends AppCompatActivity {
         setContentView(R.layout.activity_dolci);
         sessionManagerGestore = new SessionManagerGestore(Dolci.this, SessionManagerGestore.SESSION_USERSESSION);
         back = findViewById(R.id.back_icon);
-        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         add_antipasti = findViewById(R.id.btn_add_antipasti);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Dolci");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Dolci");
         dolci = new ArrayList<>();
-        adapter = new MyAdapter(this, dolci);
+        adapter = new MyAdapter(this, dolci, "Dolci");
         recyclerView.setAdapter(adapter);
 
         root.addValueEventListener(new ValueEventListener() {
@@ -68,6 +74,7 @@ public class Dolci extends AppCompatActivity {
             }
         });
     }
+
     public void callVistaGestoreMenu(View view) {
         onBackPressed();
     }

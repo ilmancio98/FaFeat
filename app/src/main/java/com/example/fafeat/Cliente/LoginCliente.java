@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fafeat.Common.LoginSignup.ForgetPassword;
+import com.example.fafeat.Databases.SessionManager;
+import com.example.fafeat.Databases.SessionManagerGestore;
+import com.example.fafeat.Gestore.LoginGestore;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -87,6 +90,14 @@ public class LoginCliente extends AppCompatActivity {
                     String passwordfromDB = dataSnapshot.child(clienteEnteredUsername).child("password").getValue(String.class);
 
                     if (passwordfromDB != null && passwordfromDB.equals(clienteEnteredPassword)){
+
+                        String _username = dataSnapshot.child(clienteEnteredUsername).child("username").getValue(String.class);
+                        String _password = dataSnapshot.child(clienteEnteredPassword).child("password").getValue(String.class);
+
+                        //Create a session
+
+                        SessionManager sessionManager = new SessionManager(LoginCliente.this, SessionManager.SESSION_USERSESSION);
+                        sessionManager.createLoginSession(_username, _password);
 
                         Intent intent = new Intent(getApplicationContext(), VistaCliente.class);
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="id_activityScreenTitlesCliente">
+
+        <item>Close</item>
+        <item>Profilo</item>
+        <item>Ordini</item>
+        <item>Carrello</item>
+        <item>Logout</item>
+
+    </string-array>
+
+    <array name="id_activityScreenIconsCliente">
+
+        <item>@drawable/general_close_icon</item>
+        <item>@drawable/bank_icon</item>
+        <item>@drawable/general_close_icon</item>
+        <item>@drawable/general_close_icon</item>
+        <item>@drawable/menu_logout_icon</item>
+    </array>
+
+</resources>

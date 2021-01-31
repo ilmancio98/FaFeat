@@ -41,17 +41,23 @@ public class Panini extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_panini);
-        sessionManagerGestore = new SessionManagerGestore(Panini.this, SessionManagerGestore.SESSION_USERSESSION);
-        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         back = findViewById(R.id.back_icon);
         add_antipasti = findViewById(R.id.btn_add_antipasti);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        sessionManagerGestore = new SessionManagerGestore(Panini.this, SessionManagerGestore.SESSION_USERSESSION);
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Panini");
 
         panini = new ArrayList<>();
-        adapter = new MyAdapter(this, panini);
+        adapter = new MyAdapter(this, panini, "Panini");
         recyclerView.setAdapter(adapter);
 
         root.addValueEventListener(new ValueEventListener() {
@@ -70,6 +76,7 @@ public class Panini extends AppCompatActivity {
             }
         });
     }
+
     public void callVistaGestoreMenu(View view) {
         onBackPressed();
     }

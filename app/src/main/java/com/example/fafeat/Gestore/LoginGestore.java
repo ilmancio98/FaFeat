@@ -94,12 +94,12 @@ public class LoginGestore extends AppCompatActivity {
 
 
                         String _username = dataSnapshot.child(gestoreEnteredUsername).child("username").getValue(String.class);
-                        String _password = dataSnapshot.child(gestoreEnteredUsername).child("password").getValue(String.class);
+                        String _password = dataSnapshot.child(gestoreEnteredPassword).child("password").getValue(String.class);
 
                         //Create a session
 
                         SessionManagerGestore sessionManagerGestore = new SessionManagerGestore(LoginGestore.this, SessionManagerGestore.SESSION_USERSESSION);
-                        sessionManagerGestore.createLoginSession(_username, _password );
+                        sessionManagerGestore.createLoginSession(_username, _password);
 
                         Intent intent = new Intent(getApplicationContext(), VistaGestore.class);
 

@@ -12,8 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.fafeat.Cliente.LoginCliente;
+import com.example.fafeat.Databases.GestoreHelperClass;
 import com.example.fafeat.R;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class SignUpGestore extends AppCompatActivity {
 
@@ -21,6 +26,12 @@ public class SignUpGestore extends AppCompatActivity {
     ImageView backBtn;
     Button next, login;
     TextView titleText, slideText;
+
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
 
 
@@ -45,6 +56,9 @@ public class SignUpGestore extends AppCompatActivity {
         usernamegestore = findViewById(R.id.signup_username);
         passwordgestore = findViewById(R.id.signup_password);
 
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
+
     }
 
     public void callSignUpGestore2 (View view) {
@@ -53,17 +67,24 @@ public class SignUpGestore extends AppCompatActivity {
             if (!validateFullName() | !validateUsername() | !validateEmail() | !validatePassword()) {
                 return;
             }
+
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Gestori");
+
         String _name = fullName.getEditText().getText().toString();
         String _usernamegestore = usernamegestore.getEditText().getText().toString();
         String _email = email.getEditText().getText().toString();
         String _passwordgestore = passwordgestore.getEditText().getText().toString();
 
+        GestoreHelperClass gestoreHelperClass = new GestoreHelperClass(_name,_usernamegestore,_email,_passwordgestore);
+
+        reference.child(_usernamegestore).setValue(gestoreHelperClass);
+
+
         Intent intent = new Intent(getApplicationContext(), SignUpGestore2.class);
 
-        intent.putExtra("name", _name);
-        intent.putExtra("username",_usernamegestore);
-        intent.putExtra("email", _email);
-        intent.putExtra("password", _passwordgestore);
+        intent.putExtra("username", _usernamegestore);
+
 
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(findViewById(R.id.next_btn), "transition_next_btn");

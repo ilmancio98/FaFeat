@@ -112,6 +112,7 @@ public class AggiuntaPrimi extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Primi.class);
         startActivity(intent);
+        finish();
     }
 
     private void  choosePicture(){

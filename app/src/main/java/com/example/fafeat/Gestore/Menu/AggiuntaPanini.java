@@ -109,6 +109,7 @@ public class AggiuntaPanini extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Panini.class);
         startActivity(intent);
+        finish();
     }
 
     private void  choosePicture(){

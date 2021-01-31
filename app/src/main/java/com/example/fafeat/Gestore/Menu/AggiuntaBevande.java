@@ -110,6 +110,7 @@ public class AggiuntaBevande extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Bevande.class);
         startActivity(intent);
+        finish();
 
     }
 

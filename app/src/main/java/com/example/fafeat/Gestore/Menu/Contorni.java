@@ -39,17 +39,24 @@ public class Contorni extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contorni);
-        sessionManagerGestore = new SessionManagerGestore(Contorni.this, SessionManagerGestore.SESSION_USERSESSION);
         back = findViewById(R.id.back_icon);
-        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         add_antipasti = findViewById(R.id.btn_add_antipasti);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        sessionManagerGestore = new SessionManagerGestore(Contorni.this, SessionManagerGestore.SESSION_USERSESSION);
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Contorni");
 
         contorni = new ArrayList<>();
-        adapter = new MyAdapter(this, contorni);
+        adapter = new MyAdapter(this, contorni, "Contorni");
         recyclerView.setAdapter(adapter);
 
         root.addValueEventListener(new ValueEventListener() {
@@ -68,6 +75,7 @@ public class Contorni extends AppCompatActivity {
             }
         });
     }
+
 
     public void callVistaGestoreMenu(View view) {
         onBackPressed();

@@ -6,46 +6,43 @@ android:layout_width="match_parent"
 android:layout_height="match_parent">
 
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/recyclerview"
-    android:layout_width="0dp"
-    android:layout_height="795dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="1.0" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="387dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-<ImageView
-    android:id="@+id/back_icon"
-    android:layout_width="73dp"
-    android:layout_height="62dp"
-    android:onClick="callVistaGestoreMenu"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0"
-    app:srcCompat="@drawable/general_back_icon"
-    tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="73dp"
+        android:layout_height="62dp"
+        android:onClick="callVistaGestoreMenu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/general_back_icon"
+        tools:ignore="MissingConstraints" />
 
-<ImageButton
-    android:id="@+id/btn_add_antipasti"
-    android:layout_width="73dp"
-    android:layout_height="62dp"
-    android:layout_alignParentEnd="true"
-    android:background="#12000000"
-    android:onClick="callAddDolci"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="1.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.0"
-    app:srcCompat="@drawable/add_missing_place_icon"
-    tools:ignore="MissingConstraints" />
+    <ImageButton
+        android:id="@+id/btn_add_antipasti"
+        android:layout_width="73dp"
+        android:layout_height="62dp"
+        android:layout_alignParentEnd="true"
+        android:background="#12000000"
+        android:onClick="callAddDolci"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.908"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.901"
+        app:srcCompat="@drawable/add_missing_place_icon"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

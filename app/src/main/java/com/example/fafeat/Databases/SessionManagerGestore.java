@@ -21,6 +21,10 @@ public class SessionManagerGestore {
     public static final String KEY_USERNAME = "username";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
+    public static final String KEY_NAME_RISTORANTE = "restaurant_name";
+    public static final String KEY_ADDRESS_RISTORANTE = "restaurant_address";
+    public static final String KEY_NUMBER_RISTORANTE = "restaurant_number";
+    public static final String KEY_IMG_RISTORANTE = "restaurant_img";
 
     //Remember Me variables
     private static final String IS_REMEMBERME = "IsRememberMe";
@@ -55,6 +59,10 @@ public class SessionManagerGestore {
         userData.put(KEY_USERNAME, usersSession.getString(KEY_USERNAME, null));
         userData.put(KEY_EMAIL, usersSession.getString(KEY_EMAIL, null));
         userData.put(KEY_PASSWORD, usersSession.getString(KEY_PASSWORD, null));
+        userData.put(KEY_NAME_RISTORANTE, usersSession.getString(KEY_NAME_RISTORANTE, null));
+        userData.put(KEY_ADDRESS_RISTORANTE, usersSession.getString(KEY_ADDRESS_RISTORANTE, null));
+        userData.put(KEY_NUMBER_RISTORANTE, usersSession.getString(KEY_NUMBER_RISTORANTE, null));
+        userData.put(KEY_IMG_RISTORANTE, usersSession.getString(KEY_IMG_RISTORANTE, null));
 
         return userData;
     }

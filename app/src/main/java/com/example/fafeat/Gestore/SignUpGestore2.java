@@ -19,6 +19,9 @@ import android.widget.Toast;
 import com.example.fafeat.Cliente.LoginCliente;
 import com.example.fafeat.Common.LoginSignup.TypeOfLoginUser;
 import com.example.fafeat.Databases.GestoreHelperClass;
+import com.example.fafeat.Databases.RestaurantHelperClass;
+import com.example.fafeat.Databases.SessionManagerGestore;
+import com.example.fafeat.Gestore.Menu.Antipasti;
 import com.example.fafeat.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +46,8 @@ public class SignUpGestore2 extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
+    SessionManagerGestore sessionManagerGestore;
+
     TextInputLayout restaurant_name, restaurant_address, restaurant_phone;
 
     @SuppressLint("CutPasteId")
@@ -55,9 +60,20 @@ public class SignUpGestore2 extends AppCompatActivity {
         restaurant_address = findViewById(R.id.signup_gestore_risto_ind);
         restaurant_phone = findViewById(R.id.signup_gestore_risto_phone);
         register = findViewById(R.id.register_gestore_btn);
+        sessionManagerGestore = new SessionManagerGestore(SignUpGestore2.this, SessionManagerGestore.SESSION_USERSESSION);
 
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+
+
+        register.setOnClickListener(view -> {
+
+            if (!validateRestaurantName() | !validateRestaurantAddress() | !validateRestaurantPhone()| !validateImg()) {
+                return;
+            }
+
+            uploadImg();
+        });
 
         restaurant_img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,45 +82,37 @@ public class SignUpGestore2 extends AppCompatActivity {
             }
         });
 
-        register.setOnClickListener(view -> {
+    }
 
-            if (!validateRestaurantName() | !validateRestaurantAddress() | !validateRestaurantPhone()) {
-                return;
-            }
-            String _name = getIntent().getStringExtra("name");
-            String _usernamegestore = getIntent().getStringExtra("username");
-            String _email = getIntent().getStringExtra("email");
-            String _passwordgestore = getIntent().getStringExtra("password");
+    private void  createGestore(String img_path){
+
+        String username = getIntent().getStringExtra("username");
 
 
-            Intent intent = new Intent(getApplicationContext(), TypeOfLoginUser.class);
+        rootNode = FirebaseDatabase.getInstance();
+        reference = rootNode.getReference("Gestori/" +username+ "/Ristorante");
 
-            rootNode = FirebaseDatabase.getInstance();
-            reference = rootNode.getReference("Gestori");
-
-            String _restaurant_name = restaurant_name.getEditText().getText().toString();
-            String _restaurant_address = restaurant_address.getEditText().getText().toString();
-            String _restaurant_phone = restaurant_phone.getEditText().getText().toString();
-            String _resturant_img = imageUri.getPath();
+        String _restaurant_name = restaurant_name.getEditText().getText().toString();
+        String _restaurant_address = restaurant_address.getEditText().getText().toString();
+        String _restaurant_phone = restaurant_phone.getEditText().getText().toString();
+        String _resturant_img = img_path;
 
 
+        RestaurantHelperClass helperClass = new RestaurantHelperClass( _restaurant_name, _restaurant_address, _restaurant_phone, _resturant_img);
 
+        reference.child(_restaurant_name).setValue(helperClass);
 
-            GestoreHelperClass helperClass = new GestoreHelperClass(_name, _usernamegestore, _email, _passwordgestore, _restaurant_name, _restaurant_address, _restaurant_phone, _resturant_img);
+        Intent intent = new Intent(getApplicationContext(), TypeOfLoginUser.class);
 
-            reference.child(_usernamegestore).setValue(helperClass);
+        Pair[] pairs = new Pair[1];
+        pairs[0] = new Pair<View, String>(findViewById(R.id.register_gestore_btn), "transition_login");
 
-            Pair[] pairs = new Pair[1];
-            pairs[0] = new Pair<View, String>(findViewById(R.id.register_gestore_btn), "transition_login");
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignUpGestore2.this, pairs);
-                startActivity(intent, options.toBundle());
-            } else {
-                startActivity(intent);
-            }
-
-        });
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignUpGestore2.this, pairs);
+            startActivity(intent, options.toBundle());
+        } else {
+            startActivity(intent);
+        }
     }
 
     private void  choosePicture(){
@@ -120,7 +128,6 @@ public class SignUpGestore2 extends AppCompatActivity {
         if (requestCode==1 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
             imageUri = data.getData();
             restaurant_img.setImageURI(imageUri);
-            uploadImg();
         }
     }
 
@@ -130,15 +137,27 @@ public class SignUpGestore2 extends AppCompatActivity {
         pd.setTitle("Caricamento immagine...");
         pd.show();
 
-        final  String randomKey = UUID.randomUUID().toString();
-        StorageReference riversRef = storageReference.child("imagesLocali/"+randomKey);
+        final String[] img_path = {(UUID.randomUUID().toString())};
+
+        StorageReference riversRef = FirebaseStorage.getInstance().getReference().child(img_path[0]);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                final Uri downloadUrl = uri;
+                                img_path[0] = downloadUrl.toString();
+
+                                pd.dismiss();
+                                Snackbar.make(findViewById(android.R.id.content), "Image Uploaded", Snackbar.LENGTH_SHORT).show();
+                                createGestore(img_path[0]);
+
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -196,6 +215,12 @@ public class SignUpGestore2 extends AppCompatActivity {
             restaurant_phone.setErrorEnabled(false);
             return true;
         }
+
+    }
+
+    private boolean validateImg(){
+
+        return imageUri != null;
 
     }
 

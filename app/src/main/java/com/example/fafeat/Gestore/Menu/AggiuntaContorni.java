@@ -109,6 +109,7 @@ public class AggiuntaContorni extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Contorni.class);
         startActivity(intent);
+        finish();
 
 
     }

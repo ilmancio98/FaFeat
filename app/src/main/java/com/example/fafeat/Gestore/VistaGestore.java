@@ -8,24 +8,22 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.widget.Button;
+
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
+
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.fafeat.Cliente.LoginCliente;
-import com.example.fafeat.Databases.SessionManager;
+
 import com.example.fafeat.Databases.SessionManagerGestore;
 import com.example.fafeat.R;
 
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class VistaGestore extends AppCompatActivity implements DrawerAdapter.OnItemSelectedListener {

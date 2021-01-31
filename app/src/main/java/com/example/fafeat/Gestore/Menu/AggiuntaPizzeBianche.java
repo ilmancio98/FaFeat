@@ -110,6 +110,7 @@ public class AggiuntaPizzeBianche extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Pizze_Bianche.class);
         startActivity(intent);
+        finish();
     }
 
 

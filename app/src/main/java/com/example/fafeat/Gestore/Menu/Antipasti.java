@@ -32,8 +32,6 @@ public class Antipasti extends AppCompatActivity {
 
     SessionManagerGestore sessionManagerGestore;
 
-
-
     private ArrayList<PietanzaHelperClass> antipasti;
 
 
@@ -46,16 +44,23 @@ public class Antipasti extends AppCompatActivity {
         setContentView(R.layout.activity_antipasti);
         sessionManagerGestore = new SessionManagerGestore(Antipasti.this, SessionManagerGestore.SESSION_USERSESSION);
 
-        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         back = findViewById(R.id.back_icon);
         add_antipasti = findViewById(R.id.btn_add_antipasti);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Antipasti");
 
         antipasti = new ArrayList<>();
-        adapter = new MyAdapter(this, antipasti);
+        adapter = new MyAdapter(this, antipasti, "Antipasti");
         recyclerView.setAdapter(adapter);
 
         root.addValueEventListener(new ValueEventListener() {

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fafeat">
-        <activity android:name=".Gestore.Menu.AggiuntaSecondi"></activity>
+        <activity android:name=".Gestore.Menu.ModificaPietanza"></activity>
+        <activity android:name=".Gestore.Menu.AggiuntaSecondi" />
         <activity android:name=".Gestore.Menu.AggiuntaPrimi" />
         <activity android:name=".Gestore.Menu.AggiuntaPizzeRosse" />
         <activity android:name=".Gestore.Menu.AggiuntaPizzeBianche" />
@@ -37,11 +38,11 @@
         <activity android:name=".Common.LoginSignup.TypeOfRegistrationUser" />
         <activity android:name=".Cliente.VistaCliente" />
         <activity android:name=".HelperClasses.CheckInternet" />
-        <activity android:name=".Databases.UserHelperClass" />
+        <activity android:name=".Databases.UserHelperClass"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".Databases.SessionManager"
             tools:ignore="Instantiatable" />
-        <activity android:name=".Common.LoginSignup.VerifyOTP" />
         <activity android:name=".Cliente.SignUpCliente" />
         <activity android:name=".Common.LoginSignup.SetNewPassword" />
         <activity android:name=".Common.LoginSignup.MakeSelection" />

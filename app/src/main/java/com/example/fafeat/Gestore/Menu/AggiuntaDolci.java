@@ -108,6 +108,7 @@ public class AggiuntaDolci extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Dolci.class);
         startActivity(intent);
+        finish();
     }
 
     private void  choosePicture(){

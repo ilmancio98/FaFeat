@@ -19,19 +19,19 @@ public class UserHelperClass {
         return _fullName;
     }
 
-    public void setFullName(String fullName) {
+    public void setFullName(String _fullName) {
         this._fullName = _fullName;
     }
 
     public String getUsername() { return _username; }
 
-    public void setUsername(String username) { this._username = _username; }
+    public void setUsername(String _username) { this._username = _username; }
 
     public String getEmail() {
         return _email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String _email) {
         this._email = _email;
     }
 
@@ -40,7 +40,7 @@ public class UserHelperClass {
         return _password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String _password) {
         this._password = _password;
     }
 

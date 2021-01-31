@@ -111,6 +111,7 @@ public class AggiuntaPizzeRosse extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Pizze_Rosse.class);
         startActivity(intent);
+        finish();
     }
 
     private void  choosePicture(){

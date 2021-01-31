@@ -109,6 +109,7 @@ public class AggiuntaSecondi extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Secondi.class);
         startActivity(intent);
+        finish();
     }
     private void  choosePicture(){
         Intent intent = new Intent();
