@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.fafeat.Common.LoginSignup.Login;
 import com.example.fafeat.Databases.UserHelperClass;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -68,6 +69,9 @@ public class SignUpCliente extends AppCompatActivity {
 
             reference.child(_username).setValue(helperClass);
 
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            intent.putExtra("username", _username);
+            startActivity(intent);
         });
     }
 
@@ -161,7 +165,7 @@ public class SignUpCliente extends AppCompatActivity {
 
 
     public void callLoginFromSignUp(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginCliente.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 }

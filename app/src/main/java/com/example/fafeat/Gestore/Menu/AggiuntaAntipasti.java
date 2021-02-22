@@ -97,7 +97,7 @@ public class AggiuntaAntipasti extends AppCompatActivity {
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
 
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Gestori/" + username + "/Menu/Antipasti");
+        reference = rootNode.getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Antipasti");
 
         String _name_pietanza = nome_antipasto.getEditText().getText().toString();
         String _ingredienti_pietanza = ingredienti_antipasto.getEditText().getText().toString();

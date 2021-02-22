@@ -54,7 +54,7 @@ public class Panini extends AppCompatActivity {
 
         sessionManagerGestore = new SessionManagerGestore(Panini.this, SessionManagerGestore.SESSION_USERSESSION);
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Panini");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Panini");
 
         panini = new ArrayList<>();
         adapter = new MyAdapter(this, panini, "Panini");

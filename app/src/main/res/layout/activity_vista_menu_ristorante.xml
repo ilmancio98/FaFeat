@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="820dp"
+    tools:context=".Cliente.Ristorante.VistaMenuRistorante">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageButton
+                android:id="@+id/btn_antipasti_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/antipasti" />
+
+            <ImageButton
+                android:id="@+id/btn_primi_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/primi" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="@font/muli_black"
+            android:text="Antipasti                Primi"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_secondi_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/secondi" />
+
+            <ImageButton
+                android:id="@+id/btn_contorni_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/insalata" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="@font/muli_black"
+            android:text="Secondi                Contorni"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_dolci_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/dolci" />
+
+            <ImageButton
+                android:id="@+id/btn_panini_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/panini" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:fontFamily="@font/muli_black"
+            android:text="Dolci                   Panini"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_pizze_rosse_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/pizze_rosse" />
+
+            <ImageButton
+                android:id="@+id/btn_pizze_bianche_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/pizze_bianche" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="389dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:fontFamily="@font/muli_black"
+            android:text="Pizze Rosse        Pizze Bianche"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnCart"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            app:backgroundTint="@color/black"
+            android:background="@drawable/carrello" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_bibite_menu"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="128dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/bevande" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="345dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="@font/muli_black"
+            android:text="Bevande"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>

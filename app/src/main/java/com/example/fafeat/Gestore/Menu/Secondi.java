@@ -55,7 +55,7 @@ public class Secondi extends AppCompatActivity {
 
         sessionManagerGestore = new SessionManagerGestore(Secondi.this, SessionManagerGestore.SESSION_USERSESSION);
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Secondi");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Secondi");
 
         secondi = new ArrayList<>();
         adapter = new MyAdapter(this, secondi, "Secondi");

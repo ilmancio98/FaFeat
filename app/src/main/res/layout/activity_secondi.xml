@@ -34,7 +34,7 @@
         android:layout_height="62dp"
         android:layout_alignParentEnd="true"
         android:background="#12000000"
-        android:onClick="callAddPrimi"
+        android:onClick="callAddSecondi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.908"

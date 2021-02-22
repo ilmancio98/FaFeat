@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/muli_black"
-                android:text="Aggiungi Antipasto"
+                android:text="Aggiungi Secondo"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="40sp"
@@ -138,7 +138,7 @@
 
 
         <Button
-            android:id="@+id/add_antipasto"
+            android:id="@+id/add_secondo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"

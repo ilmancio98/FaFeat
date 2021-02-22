@@ -6,9 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.fafeat.Gestore.DrawerAdapter;
-import com.example.fafeat.Gestore.SimpleItem;
 import com.example.fafeat.R;
 
 public class SimpleItemCliente extends DrawerItemCliente<SimpleItemCliente.ViewHolder> {
@@ -74,8 +71,8 @@ public class SimpleItemCliente extends DrawerItemCliente<SimpleItemCliente.ViewH
 
         public ViewHolder(View itemView) {
             super(itemView);
-            icon =  itemView.findViewById(R.id.icon);
-            title = itemView.findViewById(R.id.title);
+            icon =  itemView.findViewById(R.id.icon_cliente);
+            title = itemView.findViewById(R.id.title_cliente);
         }
     }
 }

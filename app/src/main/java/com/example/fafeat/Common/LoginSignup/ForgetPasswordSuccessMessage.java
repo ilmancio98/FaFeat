@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.fafeat.Cliente.LoginCliente;
 import com.example.fafeat.R;
 
 public class ForgetPasswordSuccessMessage extends AppCompatActivity {
@@ -45,7 +44,7 @@ public class ForgetPasswordSuccessMessage extends AppCompatActivity {
 
     //call login Screen
     public void backToLogin(View view){
-        startActivity(new Intent(getApplicationContext(), LoginCliente.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 }

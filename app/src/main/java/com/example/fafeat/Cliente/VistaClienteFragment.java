@@ -40,7 +40,6 @@ public class VistaClienteFragment extends Fragment {
 
     SessionManager sessionManager;
 
-    private ArrayList<UserHelperClass> cliente;
     private  static final String CLIENTI = "Clienti";
 
     @Nullable

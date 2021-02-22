@@ -1,6 +1,7 @@
 package com.example.fafeat.Gestore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,6 @@ public class MyAdapterGestore extends RecyclerView.Adapter<MyAdapterGestore.MyVi
     private ArrayList<RestaurantHelperClass> mList;
     private Context context;
 
-    String username;
-    SessionManagerGestore sessionManagerGestore;
-
-    FirebaseDatabase rootNode;
-    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
     public  MyAdapterGestore(Context context, ArrayList<RestaurantHelperClass> mList){
 
@@ -48,16 +44,22 @@ public class MyAdapterGestore extends RecyclerView.Adapter<MyAdapterGestore.MyVi
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         RestaurantHelperClass restaurantData = this.mList.get(position);
-        Glide.with(context).load(mList.get(position).get_restaurant_img()).into(holder.img);
-        holder.textViewNomeRis.setText(mList.get(position).get_restaurant_name());
-        holder.textViewIndRis.setText(mList.get(position).get_restaurant_address());
-        holder.textViewNumRis.setText(mList.get(position).get_restaurant_phone());
+        Glide.with(context).load(restaurantData.get_restaurant_img()).into(holder.img);
+        holder.textViewNomeRis.setText(restaurantData.get_restaurant_name());
+        holder.textViewIndRis.setText(restaurantData.get_restaurant_address());
+        holder.textViewNumRis.setText(restaurantData.get_restaurant_phone());
 
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                Intent i = new Intent(view.getContext(), ModificaRistorante.class);
+                i.putExtra("_restaurant_address", restaurantData.get_restaurant_address());
+                i.putExtra("_restaurant_img", restaurantData.get_restaurant_img());
+                i.putExtra("_restaurant_name", restaurantData.get_restaurant_name());
+                i.putExtra("_restaurant_phone", restaurantData.get_restaurant_phone());
+                view.getContext().startActivity(i);
             }
         });
     }

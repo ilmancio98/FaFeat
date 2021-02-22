@@ -31,14 +31,14 @@ public class Bevande extends AppCompatActivity {
 
     SessionManagerGestore sessionManagerGestore;
 
-
-
     private ArrayList<PietanzaHelperClass> bevande;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bevande);
+        sessionManagerGestore = new SessionManagerGestore(Bevande.this, SessionManagerGestore.SESSION_USERSESSION);
+
         back = findViewById(R.id.back_icon);
         add_antipasti = findViewById(R.id.btn_add_antipasti);
         recyclerView = findViewById(R.id.recyclerview);
@@ -52,9 +52,8 @@ public class Bevande extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        sessionManagerGestore = new SessionManagerGestore(Bevande.this, SessionManagerGestore.SESSION_USERSESSION);
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Bevande");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Bevande");
 
         bevande = new ArrayList<>();
         adapter = new MyAdapter(this, bevande, "Bevande");

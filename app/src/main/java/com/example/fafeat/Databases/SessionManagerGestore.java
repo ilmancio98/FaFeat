@@ -40,7 +40,7 @@ public class SessionManagerGestore {
 
     /*
     Users
-    LoginCliente Session
+    Login Session
      */
 
     public void createLoginSession(String username,String password) {

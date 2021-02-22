@@ -54,7 +54,7 @@ public class Primi extends AppCompatActivity {
 
         sessionManagerGestore = new SessionManagerGestore(Primi.this, SessionManagerGestore.SESSION_USERSESSION);
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Primi");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Primi");
 
         primi = new ArrayList<>();
         adapter = new MyAdapter(this, primi, "Primi");

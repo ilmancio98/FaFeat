@@ -36,7 +36,7 @@ import java.util.UUID;
 public class AggiuntaBevande extends AppCompatActivity {
 
     ImageView backBtn;
-    Button add_antipasto;
+    Button add_bevanda;
     private ImageView img_antipasto;
     public Uri imageUri;
 
@@ -59,7 +59,7 @@ public class AggiuntaBevande extends AppCompatActivity {
         sessionManagerGestore = new SessionManagerGestore(AggiuntaBevande.this, SessionManagerGestore.SESSION_USERSESSION);
 
         backBtn = findViewById(R.id.signup_back_button);
-        add_antipasto = findViewById(R.id.add_antipasto);
+        add_bevanda = findViewById(R.id.add_bevanda);
         img_antipasto = findViewById(R.id.img_antipasto);
 
 
@@ -72,7 +72,7 @@ public class AggiuntaBevande extends AppCompatActivity {
 
 
 
-        add_antipasto.setOnClickListener(view -> {
+        add_bevanda.setOnClickListener(view -> {
 
             if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
                 return;
@@ -94,7 +94,7 @@ public class AggiuntaBevande extends AppCompatActivity {
 
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Gestori/" + username + "/Menu/Bevande");
+        reference = rootNode.getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Bevande");
 
         String _name_pietanza= nome_antipasto.getEditText().getText().toString();
         String _ingredienti_pietanza= ingredienti_antipasto.getEditText().getText().toString();

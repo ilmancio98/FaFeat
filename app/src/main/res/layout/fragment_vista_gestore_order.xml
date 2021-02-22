@@ -3,14 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Gestore.VistaGestoreOrderFragment"
-    android:background="@color/card1">
+    android:background="@color/colorPrimary">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/signup_title_text"
+        android:layout_width="266dp"
+        android:layout_height="111dp"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/muli_black"
+        android:text="I tuoi        ordini"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:transitionName="transition_title_text" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewordini"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Ordini"
-        android:gravity="center" />
+        android:layout_height="628dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </FrameLayout>

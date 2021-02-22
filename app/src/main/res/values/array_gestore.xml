@@ -3,7 +3,7 @@
 
     <string-array name="id_activityScreenTitlesGestore">
 
-        <item>Close</item>
+        <item></item>
         <item>Ristorante</item>
         <item>Ordini</item>
         <item>Menu</item>
@@ -14,10 +14,10 @@
     <array name="id_activityScreenIconsGestore">
 
         <item>@drawable/general_close_icon</item>
-        <item>@drawable/bank_icon</item>
-        <item>@drawable/general_close_icon</item>
-        <item>@drawable/general_close_icon</item>
-        <item>@drawable/menu_logout_icon</item>
+        <item>@drawable/shop_icon</item>
+        <item>@drawable/ic_iconfinder_my_order_6457548</item>
+        <item>@drawable/ic_iconfinder_menu_6457552</item>
+        <item>@drawable/iconfinder_logout_close_sign_out_exit_access_3994382</item>
     </array>
 
 </resources>

@@ -22,7 +22,7 @@ public class RetailerStartUpScreen extends AppCompatActivity {
 
     public void callLoginScreen(View view) {
 
-        Intent intent = new Intent(getApplicationContext(), TypeOfLoginUser.class);
+        Intent intent = new Intent(getApplicationContext(), Login.class);
 
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(findViewById(R.id.login_btn), "transition_type_login");

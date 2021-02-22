@@ -16,12 +16,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.fafeat.Cliente.LoginCliente;
-import com.example.fafeat.Common.LoginSignup.TypeOfLoginUser;
-import com.example.fafeat.Databases.GestoreHelperClass;
+import com.example.fafeat.Common.LoginSignup.Login;
 import com.example.fafeat.Databases.RestaurantHelperClass;
 import com.example.fafeat.Databases.SessionManagerGestore;
-import com.example.fafeat.Gestore.Menu.Antipasti;
 import com.example.fafeat.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -90,7 +87,7 @@ public class SignUpGestore2 extends AppCompatActivity {
 
 
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Gestori/" +username+ "/Ristorante");
+        reference = rootNode.getReference("Gestori/" +username+ "/Ristoranti/Ristorante");
 
         String _restaurant_name = restaurant_name.getEditText().getText().toString();
         String _restaurant_address = restaurant_address.getEditText().getText().toString();
@@ -98,11 +95,11 @@ public class SignUpGestore2 extends AppCompatActivity {
         String _resturant_img = img_path;
 
 
-        RestaurantHelperClass helperClass = new RestaurantHelperClass( _restaurant_name, _restaurant_address, _restaurant_phone, _resturant_img);
+        RestaurantHelperClass helperClass = new RestaurantHelperClass( _restaurant_name, _restaurant_address, _restaurant_phone, _resturant_img, null);
 
-        reference.child(_restaurant_name).setValue(helperClass);
+        reference.setValue(helperClass);
 
-        Intent intent = new Intent(getApplicationContext(), TypeOfLoginUser.class);
+        Intent intent = new Intent(getApplicationContext(), Login.class);
 
         Pair[] pairs = new Pair[1];
         pairs[0] = new Pair<View, String>(findViewById(R.id.register_gestore_btn), "transition_login");
@@ -225,7 +222,7 @@ public class SignUpGestore2 extends AppCompatActivity {
     }
 
     public void callLoginFromSignUp(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginCliente.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 }

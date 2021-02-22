@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fafeat">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +12,21 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Fafeat">
-        <activity android:name=".Gestore.Menu.ModificaPietanza"></activity>
+        android:theme="@style/Theme.Fafeat"
+        tools:replace="android:theme">
+        <activity android:name=".Cliente.Cart"></activity>
+        <activity android:name=".Cliente.Ristorante.BevandeMenu" />
+        <activity android:name=".Cliente.Ristorante.Pizze_BiancheMenu" />
+        <activity android:name=".Cliente.Ristorante.Pizze_RosseMenu" />
+        <activity android:name=".Cliente.Ristorante.PaniniMenu" />
+        <activity android:name=".Cliente.Ristorante.DolciMenu" />
+        <activity android:name=".Cliente.Ristorante.ContorniMenu" />
+        <activity android:name=".Cliente.Ristorante.SecondiMenu" />
+        <activity android:name=".Cliente.Ristorante.PrimiMenu" />
+        <activity android:name=".Cliente.Ristorante.AntipastiMenu" />
+        <activity android:name=".Cliente.Ristorante.VistaMenuRistorante" />
+        <activity android:name=".Gestore.ModificaRistorante" />
+        <activity android:name=".Gestore.Menu.ModificaPietanza" />
         <activity android:name=".Gestore.Menu.AggiuntaSecondi" />
         <activity android:name=".Gestore.Menu.AggiuntaPrimi" />
         <activity android:name=".Gestore.Menu.AggiuntaPizzeRosse" />
@@ -30,15 +45,14 @@
         <activity android:name=".Gestore.Menu.Antipasti" />
         <activity android:name=".Gestore.Menu.Secondi" />
         <activity android:name=".Gestore.Menu.Primi" />
-        <activity android:name=".Gestore.LoginGestore" />
-        <activity android:name=".Common.LoginSignup.TypeOfLoginUser" />
         <activity android:name=".Gestore.SignUpGestore2" />
         <activity android:name=".Gestore.VistaGestore" />
         <activity android:name=".Gestore.SignUpGestore" />
         <activity android:name=".Common.LoginSignup.TypeOfRegistrationUser" />
         <activity android:name=".Cliente.VistaCliente" />
         <activity android:name=".HelperClasses.CheckInternet" />
-        <activity android:name=".Databases.UserHelperClass"
+        <activity
+            android:name=".Databases.UserHelperClass"
             tools:ignore="Instantiatable" />
         <activity
             android:name=".Databases.SessionManager"
@@ -46,7 +60,7 @@
         <activity android:name=".Cliente.SignUpCliente" />
         <activity android:name=".Common.LoginSignup.SetNewPassword" />
         <activity android:name=".Common.LoginSignup.MakeSelection" />
-        <activity android:name=".Cliente.LoginCliente" />
+        <activity android:name=".Common.LoginSignup.Login" />
         <activity android:name=".Common.LoginSignup.ForgetPasswordSuccessMessage" />
         <activity android:name=".Common.LoginSignup.ForgetPassword" />
         <activity

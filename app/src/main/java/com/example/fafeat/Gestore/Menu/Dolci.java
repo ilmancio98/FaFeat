@@ -53,7 +53,7 @@ public class Dolci extends AppCompatActivity {
         super.onResume();
 
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Dolci");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Dolci");
         dolci = new ArrayList<>();
         adapter = new MyAdapter(this, dolci, "Dolci");
         recyclerView.setAdapter(adapter);

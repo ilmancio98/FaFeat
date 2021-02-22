@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.fafeat.Databases.CategoriaHelperClass;
 import com.example.fafeat.Databases.GestoreHelperClass;
 import com.example.fafeat.Databases.PietanzaHelperClass;
 import com.example.fafeat.Databases.RestaurantHelperClass;
@@ -42,7 +43,7 @@ public class VistaGestoreRestFragment extends Fragment {
 
     SessionManagerGestore sessionManagerGestore;
 
-    private ArrayList<RestaurantHelperClass> ristorante;
+    private ArrayList<RestaurantHelperClass> ristoranti;
 
 
     @Nullable
@@ -54,6 +55,8 @@ public class VistaGestoreRestFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+
         return root;
     }
 
@@ -62,18 +65,20 @@ public class VistaGestoreRestFragment extends Fragment {
         super.onResume();
 
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristorante" );
-        ristorante = new ArrayList<>();
-        adapterGestore = new MyAdapterGestore(getContext(),ristorante);
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti");
+        ristoranti = new ArrayList<>();
+        adapterGestore = new MyAdapterGestore(getContext(),ristoranti);
         recyclerView.setAdapter(adapterGestore);
 
         root.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    RestaurantHelperClass restaHelperClass = dataSnapshot.getValue(RestaurantHelperClass.class);
-                    ristorante.add(restaHelperClass);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot dataSnapshotrest : dataSnapshot.getChildren()){
+                    RestaurantHelperClass restaHelperClass = dataSnapshotrest.getValue(RestaurantHelperClass.class);
+                    ristoranti.add(restaHelperClass);
                 }
+
                 adapterGestore.notifyDataSetChanged();
             }
 

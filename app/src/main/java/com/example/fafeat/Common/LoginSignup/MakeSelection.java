@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.fafeat.Cliente.LoginCliente;
 import com.example.fafeat.R;
 
 public class MakeSelection extends AppCompatActivity {
@@ -44,7 +43,7 @@ public class MakeSelection extends AppCompatActivity {
 
     //call Next Screen
     public void callOTPScreenFromMakeSelection(View view){
-        startActivity(new Intent(getApplicationContext(), LoginCliente.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
     }
     //call Previous Screen on Back arrow click
     public void callBackScreenFromMakeSelection(View view){

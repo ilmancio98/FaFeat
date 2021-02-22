@@ -15,6 +15,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.fafeat.Common.LoginSignup.Login;
 import com.example.fafeat.Databases.SessionManager;
 import com.example.fafeat.R;
 
@@ -52,9 +53,6 @@ public class VistaCliente extends AppCompatActivity implements DrawerAdapterClie
         setSupportActionBar(toolbar_cliente);
 
         slidingRootNav = new SlidingRootNavBuilder(this)
-                .withDragDistance(180)
-                .withRootViewScale(0.75f)
-                .withRootViewElevation(25)
                 .withToolbarMenuToggle(toolbar_cliente)
                 .withMenuOpened(false)
                 .withContentClickableWhenMenuOpened(false)
@@ -89,7 +87,7 @@ public class VistaCliente extends AppCompatActivity implements DrawerAdapterClie
         return new SimpleItemCliente(screenIcons[position], screenTitles[position])
                 .withIconTint(color(R.color.colorPrimary))
                 .withTextTint(color(R.color.colorPrimary))
-                .withSelectedIconTint(color(R.color.colorPrimary))
+                .withSelectedIconTint(color(R.color.colorPrimaryDark))
                 .withSelectedTextTint(color(R.color.colorPrimaryDark));
     }
 
@@ -143,7 +141,7 @@ public class VistaCliente extends AppCompatActivity implements DrawerAdapterClie
         else if (position == (POS_LOGOUT +1)) {
 
             sessionManager.logoutClienteFromSession();
-            startActivity(new Intent(getApplicationContext(), LoginCliente.class));
+            startActivity(new Intent(getApplicationContext(), Login.class));
             finish();
         }
 

@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.fafeat.Cliente.LoginCliente;
 import com.example.fafeat.HelperClasses.CheckInternet;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -105,7 +104,7 @@ public class ForgetPassword extends AppCompatActivity {
                     phoneNumberTextField.setError(null);
                     phoneNumberTextField.setErrorEnabled(false);
 
-                    Intent intent = new Intent(getApplicationContext(), LoginCliente.class);
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
                     intent.putExtra("phoneNo", _completePhoneNumber);
                     intent.putExtra("whatToDO","updateData");
                     startActivity(intent);
@@ -184,7 +183,7 @@ public class ForgetPassword extends AppCompatActivity {
 
     //call Previous Screen on Back arrow click
     public void callBackScreenFromForgetPassword(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginCliente.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 

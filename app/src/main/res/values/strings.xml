@@ -81,13 +81,13 @@
     <string name="sign_up">Sign Up</string>
     <string name="retailer_heading">Fast Arrive\nFirst Eat</string>
     <string name="retailer_tag_line">Ordina il tuo cibo prima del tuo arrivo </string>
-    <string name="create_account">Create\nAccount</string>
+    <string name="create_account">Crea\nAccount</string>
     <string name="how_we_work">How we work?</string>
     <string name="remember_me">Remember Me</string>
     <string name="forget_password">Forget Password</string>
 
     <!--  Field Strings cliente/gestore  -->
-    <string name="enter_full_name">Full Name</string>
+    <string name="enter_full_name">Nome Completo</string>
     <string name="enter_username">Username</string>
     <string name="enter_email">Email</string>
     <string name="enter_phone_number">Phone Number</string>

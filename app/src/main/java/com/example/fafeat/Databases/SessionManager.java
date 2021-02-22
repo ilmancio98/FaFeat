@@ -38,15 +38,16 @@ public class SessionManager{
 
     /*
     Users
-    LoginCliente Session
+    Login Session
      */
 
-    public void createLoginSession(String username,String password) {
+    public void createLoginSession(String username,String password, String fullname) {
 
         editor.putBoolean(IS_LOGIN, true);
 
         editor.putString(KEY_USERNAME, username);
         editor.putString(KEY_PASSWORD, password);
+        editor.putString(KEY_FULLNAME, fullname);
         editor.commit();
     }
 

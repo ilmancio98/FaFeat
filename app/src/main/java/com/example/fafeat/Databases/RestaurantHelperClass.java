@@ -1,16 +1,20 @@
 package com.example.fafeat.Databases;
 
+import java.util.List;
+
 public class RestaurantHelperClass {
-    String _restaurant_name, _restaurant_address, _restaurant_phone, _restaurant_img;
+    String _restaurant_name, _restaurant_address, _restaurant_phone, _restaurant_img, gestore;
+    List <PietanzaHelperClass> Antipasti;
 
     public RestaurantHelperClass() {
     }
 
-    public RestaurantHelperClass(String _restaurant_name, String _restaurant_address, String _restaurant_phone, String _restaurant_img) {
+    public RestaurantHelperClass(String _restaurant_name, String _restaurant_address, String _restaurant_phone, String _restaurant_img, List<PietanzaHelperClass> Antipasti) {
         this._restaurant_name = _restaurant_name;
         this._restaurant_address = _restaurant_address;
         this._restaurant_phone = _restaurant_phone;
         this._restaurant_img = _restaurant_img;
+        this.Antipasti = Antipasti;
     }
 
 
@@ -44,6 +48,14 @@ public class RestaurantHelperClass {
 
     public void set_restaurant_img(String _restaurant_img) {
         this._restaurant_img = _restaurant_img;
+    }
+
+    public String get_gestore() {
+        return gestore;
+    }
+
+    public  void set_gestore( String gestore){
+        this.gestore = gestore;
     }
 
 }

@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary"
     android:padding="30dp"
     android:transitionName="transition_cliente"
-    tools:context=".Cliente.LoginCliente"
+    tools:context=".Common.LoginSignup.Login"
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     >
 
@@ -37,7 +37,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp">
+            android:layout_marginTop="100dp">
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -97,26 +97,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/login_password"
                 android:layout_marginTop="10dp">
-
-                <CheckBox
-                    android:id="@+id/remember_me"
-                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:buttonTint="@color/black"
-                    android:text="@string/remember_me"
-                    android:textColor="@color/black" />
-
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:background="#00000000"
-                    android:onClick="callForgetPassword"
-                    android:text="@string/forget_password" />
 
             </RelativeLayout>
 

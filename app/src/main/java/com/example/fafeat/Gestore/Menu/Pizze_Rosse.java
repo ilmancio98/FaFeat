@@ -52,7 +52,7 @@ public class Pizze_Rosse extends AppCompatActivity {
 
         sessionManagerGestore = new SessionManagerGestore(Pizze_Rosse.this, SessionManagerGestore.SESSION_USERSESSION);
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/PizzeRosse");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/PizzeRosse");
 
         pizze_rosse = new ArrayList<>();
         adapter = new MyAdapter(this, pizze_rosse, "PizzeRosse");

@@ -45,10 +45,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.hbb20:ccp:2.3.1'
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
     //Chip Navigation
     implementation 'com.yarolegovich:sliding-root-nav:1.1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'

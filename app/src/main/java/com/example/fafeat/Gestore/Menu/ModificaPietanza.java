@@ -60,7 +60,7 @@ public class ModificaPietanza extends AppCompatActivity {
                 sessionManagerGestore = new SessionManagerGestore(ModificaPietanza.this, SessionManagerGestore.SESSION_USERSESSION);
                 username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
 
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/"+ categoria).child(nome);
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/"+ categoria).child(nome);
                 databaseReference.removeValue();
                 String uNome,uIngredienti,uPrezzo;
 

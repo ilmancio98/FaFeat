@@ -10,10 +10,10 @@
     android:background="@color/black">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/icon_cliente"
         android:layout_width="22dp"
         android:layout_height="22dp"
-        android:src="@android:drawable/ic_menu_sort_by_size"
+        android:src="@drawable/ic_menu_icon"
         tools:ignore="ContentDescription" />
 
     <Space
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_cliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"

@@ -57,7 +57,7 @@ public class Antipasti extends AppCompatActivity {
         super.onResume();
 
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Antipasti");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Antipasti");
 
         antipasti = new ArrayList<>();
         adapter = new MyAdapter(this, antipasti, "Antipasti");

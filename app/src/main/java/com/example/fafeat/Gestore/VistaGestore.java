@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.fafeat.Common.LoginSignup.Login;
 import com.example.fafeat.Databases.SessionManagerGestore;
 import com.example.fafeat.R;
 
@@ -144,7 +145,7 @@ public class VistaGestore extends AppCompatActivity implements DrawerAdapter.OnI
         else if (position == (POS_LOGOUT +1)) {
 
             sessionManager.logoutGestoreFromSession();
-            startActivity(new Intent(getApplicationContext(), LoginGestore.class));
+            startActivity(new Intent(getApplicationContext(), Login.class));
             finish();
         }
 

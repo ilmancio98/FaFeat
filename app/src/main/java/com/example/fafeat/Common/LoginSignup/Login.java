@@ -1,4 +1,4 @@
-package com.example.fafeat.Cliente;
+package com.example.fafeat.Common.LoginSignup;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
@@ -11,10 +11,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.fafeat.Common.LoginSignup.ForgetPassword;
+import com.example.fafeat.Cliente.SignUpCliente;
+import com.example.fafeat.Cliente.VistaCliente;
 import com.example.fafeat.Databases.SessionManager;
 import com.example.fafeat.Databases.SessionManagerGestore;
-import com.example.fafeat.Gestore.LoginGestore;
+import com.example.fafeat.Gestore.VistaGestore;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.example.fafeat.R;
 
-public class LoginCliente extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     //Variables
     ImageView backBtn;
@@ -93,11 +94,11 @@ public class LoginCliente extends AppCompatActivity {
 
                         String _username = dataSnapshot.child(clienteEnteredUsername).child("username").getValue(String.class);
                         String _password = dataSnapshot.child(clienteEnteredPassword).child("password").getValue(String.class);
-
+                        String _fullname = dataSnapshot.child(clienteEnteredUsername).child("fullName").getValue(String.class);
                         //Create a session
 
-                        SessionManager sessionManager = new SessionManager(LoginCliente.this, SessionManager.SESSION_USERSESSION);
-                        sessionManager.createLoginSession(_username, _password);
+                        SessionManager sessionManager = new SessionManager(Login.this, SessionManager.SESSION_USERSESSION);
+                        sessionManager.createLoginSession(_username, _password,_fullname);
 
                         Intent intent = new Intent(getApplicationContext(), VistaCliente.class);
 
@@ -110,8 +111,57 @@ public class LoginCliente extends AppCompatActivity {
                     }
                 }
                 else {
-                    username.setError("Utente non registrato");
-                    username.requestFocus();
+                    
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Gestori");
+                    Query checkGestori= reference.orderByChild("username").equalTo(clienteEnteredUsername);
+
+
+                    checkGestori.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            if (dataSnapshot.exists()){
+
+                                username.setError(null);
+                                username.setErrorEnabled(false);
+
+                                String passwordgestorefromDB = dataSnapshot.child(clienteEnteredUsername).child("password").getValue(String.class);
+
+
+
+                                if (passwordgestorefromDB != null && passwordgestorefromDB.equals(clienteEnteredPassword)){
+
+
+                                    String _username = dataSnapshot.child(clienteEnteredUsername).child("username").getValue(String.class);
+                                    String _password = dataSnapshot.child(clienteEnteredPassword).child("password").getValue(String.class);
+
+                                    //Create a session
+
+                                    SessionManagerGestore sessionManagerGestore = new SessionManagerGestore(Login.this, SessionManagerGestore.SESSION_USERSESSION);
+                                    sessionManagerGestore.createLoginSession(_username, _password);
+
+                                    Intent intent = new Intent(getApplicationContext(), VistaGestore.class);
+
+                                    startActivity(intent);
+
+                                }
+                                else{
+                                    password.setError("Password non corretta");
+                                    password.requestFocus();
+                                }
+                            }
+                            else {
+                                username.setError("Utente non registrato");
+                                username.requestFocus();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
             }
 
@@ -165,7 +215,7 @@ public class LoginCliente extends AppCompatActivity {
 
 
     public void callSignUpFromLogin(View view) {
-        startActivity(new Intent(getApplicationContext(), SignUpCliente.class));
+        startActivity(new Intent(getApplicationContext(), TypeOfRegistrationUser.class));
         finish();
     }
 }

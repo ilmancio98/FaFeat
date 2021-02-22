@@ -53,7 +53,7 @@ public class Contorni extends AppCompatActivity {
 
         sessionManagerGestore = new SessionManagerGestore(Contorni.this, SessionManagerGestore.SESSION_USERSESSION);
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
-        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Menu/Contorni");
+        DatabaseReference root = FirebaseDatabase.getInstance().getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Contorni");
 
         contorni = new ArrayList<>();
         adapter = new MyAdapter(this, contorni, "Contorni");

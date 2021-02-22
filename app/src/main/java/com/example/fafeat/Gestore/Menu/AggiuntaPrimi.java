@@ -35,7 +35,7 @@ import java.util.UUID;
 public class AggiuntaPrimi extends AppCompatActivity {
 
     ImageView backBtn;
-    Button add_antipasto;
+    Button add_primo;
     private ImageView img_antipasto;
     public Uri imageUri;
 
@@ -62,7 +62,7 @@ public class AggiuntaPrimi extends AppCompatActivity {
         setContentView(R.layout.activity_aggiunta_primi);
 
         backBtn = findViewById(R.id.signup_back_button);
-        add_antipasto = findViewById(R.id.add_antipasto);
+        add_primo = findViewById(R.id.add_primo);
         img_antipasto = findViewById(R.id.img_antipasto);
 
 
@@ -75,7 +75,7 @@ public class AggiuntaPrimi extends AppCompatActivity {
 
 
 
-        add_antipasto.setOnClickListener(view -> {
+        add_primo.setOnClickListener(view -> {
 
             if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
                 return;
@@ -97,7 +97,7 @@ public class AggiuntaPrimi extends AppCompatActivity {
         String username = sessionManagerGestore.getUsersDetailFromSession().get(SessionManagerGestore.KEY_USERNAME);
 
         rootNode = FirebaseDatabase.getInstance();
-        reference = rootNode.getReference("Gestori/" + username + "/Menu/Primi");
+        reference = rootNode.getReference("Gestori/" + username + "/Ristoranti/Ristorante/Menu/Primi");
 
         String _name_pietanza = nome_antipasto.getEditText().getText().toString();
         String _ingredienti_pietanza = ingredienti_antipasto.getEditText().getText().toString();

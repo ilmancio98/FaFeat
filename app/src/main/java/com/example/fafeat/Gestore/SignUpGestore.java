@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.fafeat.Cliente.LoginCliente;
+import com.example.fafeat.Common.LoginSignup.Login;
 import com.example.fafeat.Databases.GestoreHelperClass;
 import com.example.fafeat.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -185,7 +185,7 @@ public class SignUpGestore extends AppCompatActivity {
 
 
     public void callLoginFromSignUp(View view) {
-        startActivity(new Intent(getApplicationContext(), LoginGestore.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 }
