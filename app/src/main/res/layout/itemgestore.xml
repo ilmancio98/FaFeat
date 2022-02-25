@@ -39,7 +39,7 @@
                 android:layout_height="140dp"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/muli_black"
-                android:text="Il tuo ristorante"
+                android:text=" Il tuo   ristorante"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="40sp"

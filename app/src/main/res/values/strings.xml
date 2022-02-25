@@ -173,5 +173,6 @@
     <string name="img_bevanda">Image</string>
 
     <string name="add_pietanza">Aggiungi</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

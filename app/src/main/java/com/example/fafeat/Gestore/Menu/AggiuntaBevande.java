@@ -74,7 +74,7 @@ public class AggiuntaBevande extends AppCompatActivity {
 
         add_bevanda.setOnClickListener(view -> {
 
-            if (!validateNomeAntipasto() | !validateIngredienti() | !validatePrezzo() | !validateImg()) {
+            if (!validateNomeAntipasto()| !validatePrezzo() | !validateImg()) {
                 return;
             }
 

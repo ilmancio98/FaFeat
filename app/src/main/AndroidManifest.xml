@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.fafeat">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fafeat"
         tools:replace="android:theme">
-        <activity android:name=".Cliente.Cart"></activity>
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBXO34ewwWNKttTgaBTkSw8DPflVQnw0CM" />
+
+        <activity
+            android:name=".Cliente.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Cliente.Cart" />
         <activity android:name=".Cliente.Ristorante.BevandeMenu" />
         <activity android:name=".Cliente.Ristorante.Pizze_BiancheMenu" />
         <activity android:name=".Cliente.Ristorante.Pizze_RosseMenu" />
